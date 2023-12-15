@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import Wrapper from "../sections/Wrapper"
 import { useAppDispatch, useAppSelector } from "../app/hooks"
 import { getInitialPokemonData } from "../app/reducers/getInitialPokemonData"
@@ -13,13 +13,17 @@ function Search() {
   const { allPokemon, randomPokemons } = useAppSelector(
     ({ pokemon }) => pokemon,
   )
+  const [initialDataLoaded, setInitialDataLoaded] = useState(false)
 
   useEffect(() => {
-    dispatch(getInitialPokemonData())
-  }, [dispatch])
+    if (!initialDataLoaded) {
+      dispatch(getInitialPokemonData())
+      setInitialDataLoaded(true)
+    }
+  }, [dispatch, initialDataLoaded])
 
   useEffect(() => {
-    if (allPokemon) {
+    if (allPokemon && initialDataLoaded) {
       const clonedPokemons = [...allPokemon]
       const randomPokemonsId = clonedPokemons
         .sort(() => Math.random() - Math.random())
@@ -27,7 +31,23 @@ function Search() {
 
       dispatch(getPokemonData(randomPokemonsId))
     }
-  }, [allPokemon, dispatch])
+  }, [allPokemon, dispatch, initialDataLoaded])
+
+  // useEffect(() => {
+  //   console.log("useEffect is being executed")
+  //   dispatch(getInitialPokemonData())
+  // }, [dispatch])
+
+  // useEffect(() => {
+  //   if (allPokemon) {
+  //     const clonedPokemons = [...allPokemon]
+  //     const randomPokemonsId = clonedPokemons
+  //       .sort(() => Math.random() - Math.random())
+  //       .slice(0, 20)
+
+  //     dispatch(getPokemonData(randomPokemonsId))
+  //   }
+  // }, [allPokemon, dispatch])
 
   const handleChange = debounce((value: string) => getPokemon(value), 300)
 

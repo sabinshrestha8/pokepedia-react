@@ -16,6 +16,7 @@ import psychic from "../assets/types/psychic.svg"
 import rock from "../assets/types/rock.svg"
 import steel from "../assets/types/steel.svg"
 import water from "../assets/types/water.svg"
+import { pokemonTypeInterface } from "./Types"
 
 const Bug = "bug"
 const Dark = "dark"
@@ -36,7 +37,7 @@ const Rock = "rock"
 const Steel = "steel"
 const Water = "water"
 
-export const pokemonTypes = {
+export const pokemonTypes: pokemonTypeInterface = {
   bug: {
     image: bug,
     strength: [Grass, Psychic, Dark],

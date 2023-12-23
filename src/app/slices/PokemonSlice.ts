@@ -6,6 +6,7 @@ import {
 import { getInitialPokemonData } from "../reducers/getInitialPokemonData"
 import { getPokemonData } from "../reducers/getPokemonData"
 import { getUserPokemons } from "../reducers/getUserPokemons"
+import { removePokemon } from "../reducers/removePokemonFromUserList"
 
 const initialState: PokemonTypeInitialState = {
   allPokemon: undefined,
@@ -71,6 +72,17 @@ export const PokemonSlice = createSlice({
       //   state.userPokemons = action.payload
       // }
       state.userPokemons = action.payload!
+    })
+    builder.addCase(removePokemon.fulfilled, (state, action) => {
+      const pokemons = [...state.userPokemons]
+
+      const index = pokemons.findIndex(
+        (pokemon) => pokemon.firebaseId === action.payload?.id,
+      )
+
+      pokemons.splice(index, 1)
+
+      state.userPokemons = pokemons
     })
   },
 })

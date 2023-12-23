@@ -59,7 +59,7 @@ export const getUserPokemons = createAsyncThunk(
           // Push the formatted Pokemon data into the userPokemons array
           userPokemons.push({
             ...pokemons,
-            firebaseId: pokemons.id,
+            firebaseId: pokemon.id,
             image,
             types,
           })

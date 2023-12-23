@@ -7,6 +7,7 @@ import { useAppDispatch } from "../app/hooks"
 import { addToCompare } from "../app/slices/PokemonSlice"
 import { setToast } from "../app/slices/AppSlice"
 import { addPokemonToList } from "../app/reducers/addPokemonToList"
+import { removePokemon } from "../app/reducers/removePokemonFromUserList"
 
 function PokemonCardGrid({ pokemons }: { pokemons: userPokemonsType[] }) {
   const location = useLocation()
@@ -30,7 +31,20 @@ function PokemonCardGrid({ pokemons }: { pokemons: userPokemonsType[] }) {
                       onClick={() => dispatch(addPokemonToList(data))}
                     />
                   ) : (
-                    <FaTrash className="trash" />
+                    <FaTrash
+                      className="trash"
+                      onClick={async () => {
+                        await dispatch(removePokemon({ id: data.firebaseId! }))
+                        dispatch(
+                          setToast(
+                            `${
+                              data.name.charAt(0).toUpperCase() +
+                              data.name.slice(1)
+                            } removed from your collection.`,
+                          ),
+                        )
+                      }}
+                    />
                   )}
                 </div>
                 <div className="pokemon-card-compare">

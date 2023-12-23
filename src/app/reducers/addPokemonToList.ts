@@ -73,11 +73,21 @@ export const addPokemonToList = createAsyncThunk(
         await dispatch(getUserPokemons())
 
         // Return a success message via a toast notification
-        return dispatch(setToast(`${pokemon.name} added to your collection.`))
+        return dispatch(
+          setToast(
+            `${
+              pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
+            } added to your collection.`,
+          ),
+        )
       } else {
         // Return a message indicating the pokemon is already in the collection
         return dispatch(
-          setToast(`${pokemon.name} already part of your collection.`),
+          setToast(
+            `${
+              pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
+            } already part of your collection.`,
+          ),
         )
       }
     } catch (error) {

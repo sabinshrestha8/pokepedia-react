@@ -1,0 +1,38 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  //   gap: 2rem;
+  gap: 1rem;
+  color: white;
+  // margin-top: 2rem;
+  margin-top: 1rem;
+  &-image {
+    height: 15rem;
+    border-radius: 10rem;
+  }
+  &-text {
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+  }
+  h1 {
+    font-size: 4rem;
+  }
+  &-links {
+    display: flex;
+    // sets the gaps btwn rows & columns
+    gap: 1rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    a {
+      /* In CSS, var() fn is used to insert or reference the value of
+      a custom property (also known as a CSS variable) into stylesheet.*/
+      color: var(--accent-color);
+      svg {
+        font-size: 3rem;
+      }
+    }
+  }
+}

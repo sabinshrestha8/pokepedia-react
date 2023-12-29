@@ -13,7 +13,7 @@ import {
 import Description from "./pokemon pages/Description"
 import Evolution from "./pokemon pages/Evolution"
 import CapableMoves from "./pokemon pages/CapableMoves"
-import Location from "./pokemon pages/Location"
+import Locations from "./pokemon pages/Locations"
 import { setCurrentPokemon } from "../app/slices/PokemonSlice"
 
 function Pokemon() {
@@ -182,7 +182,7 @@ function Pokemon() {
       {currentPokemonTab === pokemonTabs.description && <Description />}
       {currentPokemonTab === pokemonTabs.evolution && <Evolution />}
       {currentPokemonTab === pokemonTabs.moves && <CapableMoves />}
-      {currentPokemonTab === pokemonTabs.locations && <Location />}
+      {currentPokemonTab === pokemonTabs.locations && <Locations />}
     </>
   )
 }

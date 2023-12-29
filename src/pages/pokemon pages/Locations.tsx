@@ -1,14 +1,14 @@
 import React from "react"
 import { useAppSelector } from "../../app/hooks"
 
-function Location() {
+function Locations() {
   const pokemonData = useAppSelector(
     ({ pokemon: { currentPokemon } }) => currentPokemon,
   )
 
   return (
     <div className="pokemon-locations">
-      <ul className="pokemon-locations-li">
+      <ul className="pokemon-locations-list">
         {pokemonData?.encounters.map((encounter: string) => (
           <li key={encounter} className="pokemon-location">
             {encounter}
@@ -19,4 +19,4 @@ function Location() {
   )
 }
 
-export default Location
+export default Locations

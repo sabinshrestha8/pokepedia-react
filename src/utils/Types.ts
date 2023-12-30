@@ -16,7 +16,7 @@ export interface PokemonTypeInitialState {
 export interface currentPokemonType {
   id: number
   name: string
-  types: pokemonTypeInterface
+  types: pokemonTypeInterface[]
   image: string
   stats: pokemonStatsType[]
   encounters: string[]
@@ -25,6 +25,7 @@ export interface currentPokemonType {
     abilities: string[]
     moves: string[]
   }
+  evolutionLevel: number
 }
 
 export interface genericPokemonType {

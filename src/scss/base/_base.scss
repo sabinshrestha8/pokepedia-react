@@ -1,9 +1,12 @@
+// @use "sass:color";
+
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;700&display=swap");
 
 body {
   background-color: black;
 }
 
+/* Universal selector:- Styles applied to all elements */
 * {
   margin: 0;
   padding: 0;
@@ -11,7 +14,16 @@ body {
   font-family: "Raleway", sans-serif;
 }
 
-.page {
-  height: 100%;
-  width: 100%;
+/*
+ * In CSS, :root is a pseudo-class that represents the highest-level parent in the document hierarchy, which is 
+ * usually the HTML element. Custom properties (CSS variables) are often declared inside :root to make them globally
+ * accessible throughout the document.
+ */
+:root {
+  --accent-color: #84d1c3;
 }
+
+// #root {
+//   $accent-color: #f51313;
+//   --accent-color-dark: color.scale($accent-color, $lightness: -30%);
+// }

@@ -15,10 +15,15 @@ import { useAppDispatch, useAppSelector } from "./app/hooks"
 import { clearToasts, setUserStatus } from "./app/slices/AppSlice"
 import { onAuthStateChanged } from "firebase/auth"
 import { firebaseAuth } from "./utils/FirebaseConfig"
+import { getInitialPokemonData } from "./app/reducers/getInitialPokemonData"
 
 function App() {
   const { toasts } = useAppSelector(({ app }) => app)
   const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(getInitialPokemonData())
+  }, [dispatch])
 
   useEffect(() => {
     /*

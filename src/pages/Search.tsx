@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import Wrapper from "../sections/Wrapper"
 import { useAppDispatch, useAppSelector } from "../app/hooks"
 import { getInitialPokemonData } from "../app/reducers/getInitialPokemonData"
@@ -13,17 +13,13 @@ function Search() {
   const { allPokemon, randomPokemons } = useAppSelector(
     ({ pokemon }) => pokemon,
   )
-  const [initialDataLoaded, setInitialDataLoaded] = useState(false)
+
+  // useEffect(() => {
+  //   dispatch(getInitialPokemonData())
+  // }, [])
 
   useEffect(() => {
-    if (!initialDataLoaded) {
-      dispatch(getInitialPokemonData())
-      setInitialDataLoaded(true)
-    }
-  }, [dispatch, initialDataLoaded])
-
-  useEffect(() => {
-    if (allPokemon && initialDataLoaded) {
+    if (allPokemon) {
       const clonedPokemons = [...allPokemon]
       const randomPokemonsId = clonedPokemons
         .sort(() => Math.random() - Math.random())
@@ -31,34 +27,19 @@ function Search() {
 
       dispatch(getPokemonData(randomPokemonsId))
     }
-  }, [allPokemon, dispatch, initialDataLoaded])
-
-  // useEffect(() => {
-  //   console.log("useEffect is being executed")
-  //   dispatch(getInitialPokemonData())
-  // }, [dispatch])
-
-  // useEffect(() => {
-  //   if (allPokemon) {
-  //     const clonedPokemons = [...allPokemon]
-  //     const randomPokemonsId = clonedPokemons
-  //       .sort(() => Math.random() - Math.random())
-  //       .slice(0, 20)
-
-  //     dispatch(getPokemonData(randomPokemonsId))
-  //   }
-  // }, [allPokemon, dispatch])
+  }, [dispatch, allPokemon])
 
   const handleChange = debounce((value: string) => getPokemon(value), 300)
 
-  const getPokemon = async (value: string) => {
+  const getPokemon = (value: string) => {
     if (value.length) {
       const pokemons = allPokemon?.filter((pokemon) =>
         pokemon.name.includes(value.toLowerCase()),
       )
-      dispatch(getPokemonData(pokemons!))
+
+      if (pokemons) dispatch(getPokemonData(pokemons))
     } else {
-      const clonedPokemons = [...(allPokemon as [])]
+      const clonedPokemons = [...(allPokemon || [])]
       const randomPokemonsId = clonedPokemons
         .sort(() => Math.random() - Math.random())
         .slice(0, 20)
@@ -67,18 +48,16 @@ function Search() {
   }
 
   return (
-    <>
-      <div className="search">
-        <input
-          type="text"
-          className="pokemon-searchbar"
-          placeholder="Search Pokemon"
-          onChange={(e) => handleChange(e.target.value)}
-          // onChange={(e) => getPokemon(e.target.value)}
-        />
-        <PokemonCardGrid pokemons={randomPokemons!} />
-      </div>
-    </>
+    <div className="search">
+      <input
+        type="text"
+        className="pokemon-searchbar"
+        placeholder="Search Pokemon"
+        onChange={(e) => handleChange(e.target.value)}
+        // onChange={(e) => getPokemon(e.target.value)}
+      />
+      <PokemonCardGrid pokemons={randomPokemons!} />
+    </div>
   )
 }
 

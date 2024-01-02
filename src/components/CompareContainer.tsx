@@ -51,7 +51,7 @@ function CompareContainer({
           <div className="pokemon-type-icons">
             {createStatsArray(pokemon?.types!, "strength").map(
               (stat: { image: string }) => (
-                <div className="pokemon-type">
+                <div className="pokemon-type" key={stat.image}>
                   <img
                     src={stat.image}
                     alt="pokemon type"
@@ -67,7 +67,7 @@ function CompareContainer({
           <div className="pokemon-type-icons">
             {createStatsArray(pokemon?.types!, "resistance").map(
               (stat: { image: string }) => (
-                <div className="pokemon-type">
+                <div className="pokemon-type" key={stat.image}>
                   <img
                     src={stat.image}
                     alt="pokemon type"
@@ -83,7 +83,7 @@ function CompareContainer({
           <div className="pokemon-type-icons">
             {createStatsArray(pokemon?.types!, "vulnerable").map(
               (stat: { image: string }) => (
-                <div className="pokemon-type">
+                <div className="pokemon-type" key={stat.image}>
                   <img
                     src={stat.image}
                     alt="pokemon type"
@@ -99,7 +99,7 @@ function CompareContainer({
           <div className="pokemon-type-icons">
             {createStatsArray(pokemon?.types!, "weakness").map(
               (stat: { image: string }) => (
-                <div className="pokemon-type">
+                <div className="pokemon-type" key={stat.image}>
                   <img
                     src={stat.image}
                     alt="pokemon type"
@@ -144,7 +144,7 @@ function CompareContainer({
                     const keys = Object.keys(type)
 
                     return (
-                      <div className="pokemon-type">
+                      <div className="pokemon-type" key={type[keys[0]].image}>
                         <img
                           src={type[keys[0]].image}
                           alt="pokemon type"

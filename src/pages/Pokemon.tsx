@@ -157,22 +157,55 @@ function Pokemon() {
       hueDistance: 0.083333333,
     }
 
-    /**
-     * Asynchronously extracts the most dominant color from a given image.
-     * The extracted color is then applied as the accent color to the root element.
-     */
-    const getColor = async () => {
+    const setTabColor = async () => {
       /* extract the most dominant color from a given image
       using the extractColors() with specified options. */
       const color = await extractColors(imageElemet.src, options)
 
+      // returns the root element(reference) of the document, which is usually the <html> element.
       const root = document.documentElement
 
+      const accentColor = color[0].hex.split('"')[0]
+
+      const lightnessThreshold = 0.76 // Adjust this threshold based on your preference
+
       // Apply the dominant color as the accent color to the root element.
-      root.style.setProperty("--accent-color", color[0].hex.split('"')[0])
+      root.style.setProperty("--accent-color", accentColor)
+
+      // Check lightness and set tab text color accordingly
+      const lightness = color[0].lightness // Use the lightness value from the color object
+
+      const alltabs = document.querySelectorAll(
+        "footer .data ul li",
+      ) as NodeListOf<HTMLElement>
+
+      alltabs.forEach((tab) => {
+        const isActive = tab.classList.contains("active")
+
+        // store color based on given conditions
+        const color = isActive
+          ? lightness > lightnessThreshold
+            ? "#2a2c3a"
+            : "white"
+          : "white"
+
+        // overwrite tab text color
+        tab.style.color = color
+
+        // if (tab.className === "active") {
+        //   if (lightness > lightnessThreshold) {
+        //     // tab.style.color = "black"
+        //     tab.style.color = "#2a2c3a"
+        //   } else {
+        //     tab.style.color = "white"
+        //   }
+        // } else {
+        //   tab.style.color = "white"
+        // }
+      })
     }
 
-    getColor()
+    setTabColor()
 
     getPokemonInfo(imageElemet.src)
   }, [params, getPokemonInfo])

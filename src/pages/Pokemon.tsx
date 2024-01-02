@@ -3,7 +3,7 @@ import Wrapper from "../sections/Wrapper"
 import { useParams } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../app/hooks"
 import { extractColors } from "extract-colors"
-import React, { useEffect, useCallback } from "react"
+import React, { useEffect, useCallback, useState } from "react"
 import { defaultImages, images } from "../utils/getPokemonImages"
 import {
   pokemonRoute,
@@ -15,11 +15,16 @@ import Evolution from "./pokemon pages/Evolution"
 import CapableMoves from "./pokemon pages/CapableMoves"
 import Locations from "./pokemon pages/Locations"
 import { setCurrentPokemon } from "../app/slices/PokemonSlice"
+import Loader from "../components/Loader"
 
 function Pokemon() {
   const params = useParams()
   const dispatch = useAppDispatch()
   const { currentPokemonTab } = useAppSelector(({ app }) => app)
+  const currentPokemon = useAppSelector(
+    ({ pokemon: { currentPokemon } }) => currentPokemon,
+  )
+  const [isDataLoading, setIsDataLoading] = useState(true)
 
   const getRecursiveEvolution: any = useCallback(
     (evolutionChain: any, level: number, evolutionData: any) => {
@@ -133,6 +138,8 @@ function Pokemon() {
           pokemonAbilities,
         }),
       )
+
+      setIsDataLoading(false)
     },
     [getEvolutionData, params.id, dispatch],
   )
@@ -212,10 +219,16 @@ function Pokemon() {
 
   return (
     <>
-      {currentPokemonTab === pokemonTabs.description && <Description />}
-      {currentPokemonTab === pokemonTabs.evolution && <Evolution />}
-      {currentPokemonTab === pokemonTabs.moves && <CapableMoves />}
-      {currentPokemonTab === pokemonTabs.locations && <Locations />}
+      {!isDataLoading && currentPokemon ? (
+        <>
+          {currentPokemonTab === pokemonTabs.description && <Description />}
+          {currentPokemonTab === pokemonTabs.evolution && <Evolution />}
+          {currentPokemonTab === pokemonTabs.moves && <CapableMoves />}
+          {currentPokemonTab === pokemonTabs.locations && <Locations />}
+        </>
+      ) : (
+        <Loader />
+      )}
     </>
   )
 }

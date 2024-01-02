@@ -22,10 +22,6 @@ function App() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(getInitialPokemonData())
-  }, [dispatch])
-
-  useEffect(() => {
     /*
      * Setup an observer on the firebase authentication service.
      * This observer continuously checks for changes in user's
@@ -56,6 +52,10 @@ function App() {
       dispatch(clearToasts())
     }
   }, [toasts, dispatch])
+
+  useEffect(() => {
+    dispatch(getInitialPokemonData())
+  }, [dispatch])
 
   return (
     <div className="main-container">

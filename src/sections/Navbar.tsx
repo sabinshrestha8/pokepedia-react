@@ -2,9 +2,13 @@ import React, { useEffect } from "react"
 import pokeballIcon from "../assets/pokeball-icon.png"
 import { GiHamburgerMenu } from "react-icons/gi"
 import { Link, useLocation } from "react-router-dom"
+import { setPokemonTab } from "../app/slices/AppSlice"
+import { useAppDispatch, useAppSelector } from "../app/hooks"
 
 function Navbar() {
+  const dispatch = useAppDispatch()
   const location = useLocation()
+  const { currentPokemonTab } = useAppSelector(({ app }) => app)
 
   const navigationRoutes = [
     {
@@ -30,6 +34,16 @@ function Navbar() {
   ]
 
   useEffect(() => {
+    const isPokemonRoute = location.pathname.includes("/pokemon")
+
+    if (!isPokemonRoute) {
+      // Dispatch the action to update the currentTab state
+      dispatch(setPokemonTab(""))
+    } else if (currentPokemonTab === "") {
+      // If it's a Pokemon route and currentPokemonTab is empty, set it to "description"
+      dispatch(setPokemonTab("description"))
+    }
+
     const index = navigationRoutes.findIndex(({ route }) =>
       location.pathname.includes(route),
     )

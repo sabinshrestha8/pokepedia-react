@@ -6,6 +6,7 @@ import { extractColors } from "extract-colors"
 import React, { useEffect, useCallback, useState } from "react"
 import { defaultImages, images } from "../utils/PokemonImages"
 import {
+  lightnessThreshold,
   pokemonRoute,
   pokemonSpeciesRoute,
   pokemonTabs,
@@ -174,7 +175,7 @@ function Pokemon() {
 
       const accentColor = color[0].hex.split('"')[0]
 
-      const lightnessThreshold = 0.76 // Adjust this threshold based on your preference
+      // const lightnessThreshold = 0.76 // Adjust this threshold based on your preference
 
       // Apply the dominant color as the accent color to the root element.
       root.style.setProperty("--accent-color", accentColor)

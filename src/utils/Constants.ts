@@ -10,3 +10,6 @@ export const pokemonTabs = {
   locations: "locations",
   moves: "moves",
 }
+
+// Lightness Threshold
+export const lightnessThreshold = 0.76 // Adjust this threshold based on your preference

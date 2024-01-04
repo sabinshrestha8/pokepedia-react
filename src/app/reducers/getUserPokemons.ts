@@ -3,8 +3,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 import { userPokemonsType } from "../../utils/Types"
 import { getDocs, query, where } from "firebase/firestore"
 import { pokemonListRef } from "../../utils/FirebaseConfig"
-import { defaultImages, images } from "../../utils/getPokemonImages"
-import { pokemonTypes } from "../../utils/getPokemonTypes"
+import { defaultImages, images } from "../../utils/PokemonImages"
+import { pokemonTypes } from "../../utils/PokemonTypes"
 
 /*
  * When you use createAsyncThunk(), you are creating a thunk action creator.

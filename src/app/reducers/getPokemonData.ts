@@ -1,8 +1,8 @@
 // @ts-nocheck
 import axios from "axios"
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { pokemonTypes } from "../../utils/getPokemonTypes"
-import { defaultImages, images } from "../../utils/getPokemonImages"
+import { pokemonTypes } from "../../utils/PokemonTypes"
+import { defaultImages, images } from "../../utils/PokemonImages"
 import { generatedPokemonType, genericPokemonType } from "../../utils/Types"
 
 export const getPokemonData = createAsyncThunk(

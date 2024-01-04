@@ -5,7 +5,7 @@ import {
   userPokemonsType,
 } from "../utils/Types"
 import { FaPlus } from "react-icons/fa"
-import { pokemonTypes } from "../utils/getPokemonTypes"
+import { pokemonTypes } from "../utils/PokemonTypes"
 import { useAppDispatch } from "../app/hooks"
 import { removeFromCompare } from "../app/slices/PokemonSlice"
 import { useNavigate } from "react-router-dom"

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../app/hooks"
 import { extractColors } from "extract-colors"
 import React, { useEffect, useCallback, useState } from "react"
-import { defaultImages, images } from "../utils/getPokemonImages"
+import { defaultImages, images } from "../utils/PokemonImages"
 import {
   pokemonRoute,
   pokemonSpeciesRoute,
@@ -198,17 +198,6 @@ function Pokemon() {
 
         // overwrite tab text color
         tab.style.color = color
-
-        // if (tab.className === "active") {
-        //   if (lightness > lightnessThreshold) {
-        //     // tab.style.color = "black"
-        //     tab.style.color = "#2a2c3a"
-        //   } else {
-        //     tab.style.color = "white"
-        //   }
-        // } else {
-        //   tab.style.color = "white"
-        // }
       })
     }
 

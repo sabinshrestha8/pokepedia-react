@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { pokemonTypes } from "../utils/getPokemonTypes"
+import { pokemonTypes } from "../utils/PokemonTypes"
 import { useAppDispatch } from "../app/hooks"
 import { addPokemonToList } from "../app/reducers/addPokemonToList"
 import { setPokemonTab } from "../app/slices/AppSlice"

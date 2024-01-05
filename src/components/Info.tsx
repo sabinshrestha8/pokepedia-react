@@ -5,6 +5,10 @@ import { addPokemonToList } from "../app/reducers/addPokemonToList"
 import { setPokemonTab } from "../app/slices/AppSlice"
 import { pokemonTabs } from "../utils/Constants"
 import { currentPokemonType, pokemonStatsType } from "../utils/Types"
+import {
+  resetTextColorToWhiteOnMouseLeave,
+  setTextColorOnMouseEnter,
+} from "../utils/Color"
 
 function Info({ data }: { data: currentPokemonType | undefined }) {
   const dispatch = useAppDispatch()
@@ -96,6 +100,8 @@ function Info({ data }: { data: currentPokemonType | undefined }) {
         <button
           onClick={() => dispatch(addPokemonToList(data!))}
           className="add-pokemon"
+          onMouseEnter={setTextColorOnMouseEnter}
+          onMouseLeave={resetTextColorToWhiteOnMouseLeave}
         >
           Add Pokemon
         </button>

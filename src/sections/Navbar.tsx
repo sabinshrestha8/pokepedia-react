@@ -4,13 +4,15 @@ import { GiHamburgerMenu } from "react-icons/gi"
 import { Link, useLocation } from "react-router-dom"
 import { setPokemonTab } from "../app/slices/AppSlice"
 import { useAppDispatch, useAppSelector } from "../app/hooks"
+import Sidebar from "./Sidebar"
+import { navigationRoutes } from "../utils/Constants"
 
 function Navbar() {
   const dispatch = useAppDispatch()
   const location = useLocation()
   const { currentPokemonTab } = useAppSelector(({ app }) => app)
 
-  const navigationRoutes = [
+  /* const navigationRoutes = [
     {
       name: "Search",
       route: "/search",
@@ -31,7 +33,7 @@ function Navbar() {
       name: "About",
       route: "/about",
     },
-  ]
+  ] */
 
   useEffect(() => {
     const isPokemonRoute = location.pathname.includes("/pokemon")
@@ -81,7 +83,8 @@ function Navbar() {
         </ul>
       </div>
       <div className="block">
-        <GiHamburgerMenu />
+        {/* <GiHamburgerMenu /> */}
+        <Sidebar />
       </div>
     </nav>
   )

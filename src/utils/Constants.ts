@@ -11,5 +11,28 @@ export const pokemonTabs = {
   moves: "moves",
 }
 
+export const navigationRoutes = [
+  {
+    name: "Search",
+    route: "/search",
+  },
+  {
+    name: "Compare",
+    route: "/compare",
+  },
+  {
+    name: "Pokemon",
+    route: "/pokemon",
+  },
+  {
+    name: "My List",
+    route: "/list",
+  },
+  {
+    name: "About",
+    route: "/about",
+  },
+]
+
 // Lightness Threshold
 export const lightnessThreshold = 0.76 // Adjust this threshold based on your preference

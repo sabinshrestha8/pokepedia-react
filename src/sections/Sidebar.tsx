@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react"
 import { GiHamburgerMenu } from "react-icons/gi"
 import { Link, useLocation } from "react-router-dom"
 import { navigationRoutes } from "../utils/Constants"
+import { MdCatchingPokemon, MdComment, MdList } from "react-icons/md"
+import { IoGitCompareSharp, IoSearch } from "react-icons/io5"
 
 function Sidebar() {
   const mySidePanelRef = useRef<HTMLDivElement | null>(null)
@@ -11,7 +13,7 @@ function Sidebar() {
   const openSidePanel = () => {
     const mySidePanel = mySidePanelRef.current
     if (mySidePanel) {
-      mySidePanel.style.width = "250px"
+      mySidePanel.style.width = "15rem"
       setIsSidebarOpen(true)
     }
   }
@@ -48,13 +50,15 @@ function Sidebar() {
     anchors.forEach((anchor) => {
       const isLocation = navigationRoutes.some(
         ({ route, name }) =>
-          location.pathname.includes(route) && anchor.innerHTML === name,
+          location.pathname.includes(route) && anchor.textContent === name,
       )
 
       if (isLocation) {
         anchor.style.color = "#f1f1f1"
+        anchor.querySelector("svg")?.setAttribute("fill", "#f1f1f1")
       } else {
         anchor.style.color = "#818181"
+        anchor.querySelector("svg")?.setAttribute("fill", "#818181")
       }
     })
 
@@ -76,11 +80,26 @@ function Sidebar() {
   return (
     <>
       <div className="sidepanel" ref={mySidePanelRef}>
-        <Link to="/search">Search</Link>
-        <Link to="/compare">Compare</Link>
-        <Link to="/pokemon">Pokemon</Link>
-        <Link to="/list">My List</Link>
-        <Link to="/about">About</Link>
+        <Link to="/search">
+          <IoSearch />
+          Search
+        </Link>
+        <Link to="/compare">
+          <IoGitCompareSharp />
+          Compare
+        </Link>
+        <Link to="/pokemon">
+          <MdCatchingPokemon />
+          Pokemon
+        </Link>
+        <Link to="/list">
+          <MdList />
+          My List
+        </Link>
+        <Link to="/about">
+          <MdComment />
+          About
+        </Link>
       </div>
 
       <GiHamburgerMenu onClick={openSidePanel} />

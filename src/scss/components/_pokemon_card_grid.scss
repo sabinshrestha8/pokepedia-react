@@ -3,6 +3,12 @@
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: rgba(219, 219, 219, 0.557) transparent;
+
+  /* Start styling to ensure pagination stays at bottom */
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Set a fixed height for the container */
+  /* End styling to ensure pagination stays at bottom */
   .pokemon-card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useMemo, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { IoGitCompare } from "react-icons/io5"
 import { FaPlus, FaTrash } from "react-icons/fa"
@@ -9,19 +9,29 @@ import { setPokemonTab, setToast } from "../app/slices/AppSlice"
 import { addPokemonToList } from "../app/reducers/addPokemonToList"
 import { removePokemon } from "../app/reducers/removePokemonFromUserList"
 import { pokemonTabs } from "../utils/Constants"
+import Pagination from "./Pagination"
+
+let PageSize = 12
 
 function PokemonCardGrid({ pokemons }: { pokemons: userPokemonsType[] }) {
   const location = useLocation()
   // returns a function that lets you navigate programmatically
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const [currentPage, setCurrentPage] = useState(1)
+
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize
+    const lastPageIndex = firstPageIndex + PageSize
+    return pokemons.slice(firstPageIndex, lastPageIndex)
+  }, [currentPage, pokemons])
 
   return (
     <div className="pokemon-card-grid-container">
       <div className="pokemon-card-grid">
         {pokemons &&
           pokemons.length > 0 &&
-          pokemons?.map((data: userPokemonsType) => {
+          currentTableData?.map((data: userPokemonsType) => {
             return (
               <div className="pokemon-card" key={data.id}>
                 <div className="pokemon-card-list">
@@ -100,6 +110,13 @@ function PokemonCardGrid({ pokemons }: { pokemons: userPokemonsType[] }) {
             )
           })}
       </div>
+      <Pagination
+        className="pagination-bar"
+        currentPage={currentPage}
+        totalCount={pokemons.length}
+        pageSize={PageSize}
+        onPageChange={(page) => setCurrentPage(page)}
+      />
     </div>
   )
 }

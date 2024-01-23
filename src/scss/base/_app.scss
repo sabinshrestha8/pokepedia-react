@@ -44,3 +44,9 @@ button {
     background-color: rgba(219, 219, 219, 0.557);
   }
 }
+
+/* Additional styles for the search page */
+.search .pokemon-card-grid-container {
+  /* Adjust the height to accommodate the search bar */
+  max-height: calc(80vh - 9%); /* Subtract the height of the search bar */
+}
